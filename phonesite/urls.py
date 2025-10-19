@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from views import create_phone
+from bboard.views import time, show_catalog, show_product
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', show_catalog),
-    path('catalog/<slug:slug>/', bboard.views.show_product),
-    path('legend', create_phone),
+    path('product', show_product),
+    #path('catalog/<slug:slug>/', show_product),
+    path('time/', time),
+
 ]

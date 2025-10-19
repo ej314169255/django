@@ -1,10 +1,8 @@
 import csv
 
 from django.utils.text import slugify
-
 from django.core.management.base import BaseCommand
 from bboard.models import Phone
-
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -14,15 +12,13 @@ class Command(BaseCommand):
         with open('phones.csv', 'r') as csvfile:
             phone_reader = csv.reader(csvfile, delimiter=';')
             # пропускаем заголовок
-            csv_headings = next(phone_reader)
-            print(f'def{csv_headings}')
-            # next(phone_reader)
+            next(phone_reader)
 
             for line in phone_reader:
                 # TODO: Добавьте сохранение модели
-                p = Phone(name=line[1], image=line[2], price=line[3], release_date=line[4], lte_exists=slugify(line[1]))
+                p = Phone(name=line[1], image=line[2], price=line[3], release_date=line[4], lte_exists=line[5], slug = slugify(line[1]))
 
                 p.save()
 
-                print(slugify(line[1]))
+                print(p.id, p.price, p.release_date, p.slug)
 
